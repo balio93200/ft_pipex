@@ -157,9 +157,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-/*
-** Returns 1 if line is exactly limiter + "\n" or limiter (EOF without \n).
-*/
 int	ft_streq_limiter(const char *line, const char *limiter)
 {
 	size_t	ll;
