@@ -4,7 +4,6 @@ int	is_here_doc(const char *s)
 {
 	if (!s)
 		return (0);
-	/* exact match "here_doc" */
 	return (ft_strcmp(s, "here_doc") == 0);
 }
 
