@@ -68,7 +68,7 @@ int	run_pipeline(t_pipex *px, char **cmds, int cmd_count, int in_fd, int out_fd,
 	int		pfd[2];
 	int		prev_read;
 	pid_t	last_pid;
-	pid_t	pids[1024]; /* enough for bonus eval sizes; could be dynamic */
+	pid_t	pids[1024];
 	int		pidn;
 	int		status;
 	int		st;
@@ -96,12 +96,10 @@ int	run_pipeline(t_pipex *px, char **cmds, int cmd_count, int in_fd, int out_fd,
 		prev_read = pfd[0];
 		i++;
 	}
-	/* parent closes endpoints */
 	close(in_fd);
 	close(out_fd);
 	if (prev_read != in_fd && prev_read != -1)
 		close(prev_read);
-	/* wait children */
 	status = 1;
 	i = 0;
 	while (i < pidn)
