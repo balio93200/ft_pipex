@@ -126,3 +126,52 @@ int	is_space(char c)
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\r' || c == '\v' || c == '\f');
 }
+
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t				i;
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	if (!dst && !src)
+		return (NULL);
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+/*
+** Returns 1 if line is exactly limiter + "\n" or limiter (EOF without \n).
+*/
+int	ft_streq_limiter(const char *line, const char *limiter)
+{
+	size_t	ll;
+	size_t	ml;
+
+	if (!line || !limiter)
+		return (0);
+	ml = ft_strlen(limiter);
+	ll = ft_strlen(line);
+	if (ll == ml && ft_strncmp(line, limiter, ml) == 0)
+		return (1);
+	if (ll == ml + 1 && line[ll - 1] == '\n' && ft_strncmp(line, limiter, ml) == 0)
+		return (1);
+	return (0);
+}

@@ -6,7 +6,7 @@ static void	safe_dup2(int oldfd, int newfd)
 		die_perror("dup2", 1);
 }
 
-static int	open_infile_like_shell(const char *file1)
+int	open_infile_like_shell(const char *file1)
 {
 	int	fd;
 
@@ -25,11 +25,11 @@ static int	open_infile_like_shell(const char *file1)
 	return (fd);
 }
 
-static int	open_outfile(const char *file2)
+int	open_outfile_mode(const char *file2, int here_doc)
 {
 	int	fd;
 
-	fd = open(file2, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	fd = open(file2, O_CREAT | (here_doc ? O_APPEND : O_TRUNC) | O_WRONLY, 0644);
 	if (fd == -1)
 	{
 		putstr_fd("pipex: ", 2);
@@ -81,7 +81,7 @@ void	run_child2(t_pipex *px, char *cmd2, char *file2)
 {
 	int	outfd;
 
-	outfd = open_outfile(file2);
+	outfd = open_outfile_mode(file2, 0);
 	close(px->pipe_fd[1]);
 	safe_dup2(px->pipe_fd[0], STDIN_FILENO);
 	safe_dup2(outfd, STDOUT_FILENO);
