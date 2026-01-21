@@ -39,13 +39,11 @@ void	puterr_prefix_cmd(const char *prefix, const char *cmd, const char *msg);
 void	die_perror(const char *ctx, int code);
 int		is_space(char c);
 
-/* bonus */
 int		is_here_doc(const char *s);
 int		open_infile_like_shell(const char *file1);
 int		open_outfile_mode(const char *file2, int here_doc);
 int		create_heredoc_pipe(const char *limiter, pid_t *writer_pid);
 
-/* extra utils */
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_streq_limiter(const char *line, const char *limiter);
